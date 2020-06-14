@@ -14,7 +14,7 @@ export default function Home() {
         </h1>
 
         <p className="description">
-          An Msc internship offer portal!
+          An MSc internship offer portal!
         </p>
 
         <div className="grid">
