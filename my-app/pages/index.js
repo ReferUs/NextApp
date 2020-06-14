@@ -4,47 +4,31 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>ReferUs</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          ReferUs
         </h1>
 
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          A Msc internship offer portal!
         </p>
 
         <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+            <a href="http://google.com" className="card">
+              <h3>Alumini</h3>
+              <p>Sign in via</p>
+              <img src ="/google.jpg" alt="Google" className="mainlogo"/>
+            </a>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+            <a href="http://google.com" className="card">
+              <h3>Student</h3>
+              <p>Sign in via</p>
+              <img src = "/github.png" alt="Github" className="mainlogo"/>
+            </a>
         </div>
       </main>
 
@@ -54,8 +38,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+          <h3>Copyright @ReferUs</h3>
         </a>
       </footer>
 
@@ -142,20 +125,20 @@ export default function Home() {
           display: flex;
           align-items: center;
           justify-content: center;
-          flex-wrap: wrap;
 
-          max-width: 800px;
+
+          max-width: 1000px;
           margin-top: 3rem;
         }
 
         .card {
-          margin: 1rem;
+          margin: 2rem;
           flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
+          padding: 3rem;
+          text-align: center;
           color: inherit;
           text-decoration: none;
-          border: 1px solid #eaeaea;
+          border: 3px solid #eaeaea;
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
         }
@@ -174,13 +157,20 @@ export default function Home() {
 
         .card p {
           margin: 0;
-          font-size: 1.25rem;
+          font-size: 1.0rem;
           line-height: 1.5;
         }
 
         .logo {
           height: 1em;
         }
+
+        .mainlogo {
+          justify-content: center;
+          height: 5em;
+          width: 5em;
+        }
+
 
         @media (max-width: 600px) {
           .grid {
