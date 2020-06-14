@@ -1,6 +1,13 @@
 import Head from 'next/head'
+import GoogleLogin from 'react-google-login';
 
 export default function Home() {
+
+  const responseGoogle = (response)=>{
+    console.log(response);
+    console.log(response.profileObj);
+  }
+
   return (
     <div className="container">
       <Head>
@@ -18,11 +25,13 @@ export default function Home() {
         </p>
 
         <div className="grid">
-            <a href="http://google.com" className="card">
-              <h3>Alumini</h3>
-              <p>Sign in via</p>
-              <img src ="/google.jpg" alt="Google" className="mainlogo"/>
-            </a>
+            <GoogleLogin
+              clientId="997301600069-9vmhq1sc8fbe3cstop7j2fk66dg43eug.apps.googleusercontent.com"
+              buttonText="Login"
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
 
             <a href="http://google.com" className="card">
               <h3>Student</h3>
