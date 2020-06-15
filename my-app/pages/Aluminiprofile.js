@@ -1,7 +1,6 @@
 export default function Home() {
-
   return (
     <div>
-        <h1>Students... hi</h1>
+        <h1>Alumini... hi</h1>
     </div>)
   }

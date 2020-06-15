@@ -1,11 +1,61 @@
 import Head from 'next/head'
 import GoogleLogin from 'react-google-login';
+import GitHubLogin from 'react-github-login';
+import axios from 'axios';
+import Router from 'next/router'
+
 
 export default function Home() {
 
-  const responseGoogle = (response)=>{
+  const responseGoogleSuccess = (response)=>{
     console.log(response);
     console.log(response.profileObj);
+    Router.push('/Aluminiprofile')
+  }
+
+  const responseGoogleFailure = (response)=>{
+    console.log(response);
+  }
+
+
+  const getdata = (token) => {
+    return axios.get(`https://api.github.com/user?access_token=${token}` ,{
+      method: "POST",
+      mode:"cors",
+      headers: {
+        Accept:"application/json",
+        "content-type":"application/json"
+  }
+  })
+  .then(response => {
+      console.log(response.data)
+      Router.push('/Studentprofile')
+  })
+  .catch(err => console.log(err))
+}
+
+  const gettoken = (code) => {
+      return axios.get(`https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?client_id=8244b51a8abe376aeb12&redirect_uri=http://localhost:3000/Studentprofile&client_secret=1218dd62d57ab5ecc966d759703063c9d21cebf0&code=${code}`, {
+          method: "POST",
+          mode:"cors",
+          headers: {
+            Accept:"application/json",
+            "content-type":"application/json"
+
+      }
+      })
+      .then(response => {
+          console.log(response.data.access_token)
+          const token = response.data.access_token
+          getdata(token)
+      })
+      .catch(err => console.log(err))
+  }
+
+  const responseGithub = (response)=>{
+    console.log(response);
+    const code = response.code
+    gettoken(code)
   }
 
   return (
@@ -25,19 +75,28 @@ export default function Home() {
         </p>
 
         <div className="grid">
-            <GoogleLogin
-              clientId="997301600069-9vmhq1sc8fbe3cstop7j2fk66dg43eug.apps.googleusercontent.com"
-              buttonText="Login"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              cookiePolicy={'single_host_origin'}
-            />
-
-            <a href="http://google.com" className="card">
-              <h3>Student</h3>
+            <div className="card">
+              <h3>Alumini</h3>
+              <img src = "/google.jpg" alt="Google" className="mainlogo"/>
               <p>Sign in via</p>
+              <GoogleLogin
+                clientId="997301600069-9vmhq1sc8fbe3cstop7j2fk66dg43eug.apps.googleusercontent.com"
+                buttonText="Login"
+                onSuccess={responseGoogleSuccess}
+                onFailure={responseGoogleFailure}
+                cookiePolicy={'single_host_origin'}
+              />
+            </div>
+
+            <div className="card">
+              <h3>Student</h3>
               <img src = "/github.png" alt="Github" className="mainlogo"/>
-            </a>
+              <p>Sign in via</p>
+              <GitHubLogin clientId="8244b51a8abe376aeb12"
+              redirectUri='http://localhost:3000/Studentprofile'
+              onSuccess={responseGithub}
+              onFailure={responseGithub}/>
+            </div>
         </div>
       </main>
 
