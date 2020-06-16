@@ -8,9 +8,8 @@ import Router from 'next/router'
 export default function Home() {
 
   const responseGoogleSuccess = (response)=>{
-    console.log(response);
     console.log(response.profileObj);
-    Router.push('/Aluminiprofile')
+    Router.push({ pathname: '/Aluminiprofile', query: {keyword : response.profileObj.name}});
   }
 
   const responseGoogleFailure = (response)=>{
@@ -19,7 +18,7 @@ export default function Home() {
 
 
   const getdata = (token) => {
-    return axios.get(`https://api.github.com/user?access_token=${token}` ,{
+    return axios.get(`https://cors-anywhere.herokuapp.com/https://api.github.com/user?access_token=${token}` ,{
       method: "POST",
       mode:"cors",
       headers: {
@@ -28,8 +27,9 @@ export default function Home() {
   }
   })
   .then(response => {
-      console.log(response.data)
-      Router.push('/Studentprofile')
+      const data = response.data
+      console.log(data)
+      Router.push({ pathname: '/Studentprofile', query: {keyword : data.login}});
   })
   .catch(err => console.log(err))
 }
@@ -45,7 +45,6 @@ export default function Home() {
       }
       })
       .then(response => {
-          console.log(response.data.access_token)
           const token = response.data.access_token
           getdata(token)
       })
@@ -53,7 +52,6 @@ export default function Home() {
   }
 
   const responseGithub = (response)=>{
-    console.log(response);
     const code = response.code
     gettoken(code)
   }
