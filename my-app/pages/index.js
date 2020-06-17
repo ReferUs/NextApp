@@ -8,8 +8,9 @@ import Router from 'next/router'
 export default function Home() {
 
   const responseGoogleSuccess = (response)=>{
+    console.log(response.accessToken)
     console.log(response.profileObj);
-    Router.push({ pathname: '/Aluminiprofile', query: {keyword : response.profileObj.name}});
+    Router.push({ pathname: '/Aluminiprofile', query: {keyword : response.accessToken}});
   }
 
   const responseGoogleFailure = (response)=>{
@@ -76,10 +77,9 @@ export default function Home() {
             <div className="card">
               <h3>Alumini</h3>
               <img src = "/google.jpg" alt="Google" className="mainlogo"/>
-              <p>Sign in via</p>
               <GoogleLogin
                 clientId="997301600069-9vmhq1sc8fbe3cstop7j2fk66dg43eug.apps.googleusercontent.com"
-                buttonText="Login"
+                buttonText="Signin"
                 onSuccess={responseGoogleSuccess}
                 onFailure={responseGoogleFailure}
                 cookiePolicy={'single_host_origin'}
@@ -89,9 +89,10 @@ export default function Home() {
             <div className="card">
               <h3>Student</h3>
               <img src = "/github.png" alt="Github" className="mainlogo"/>
-              <p>Sign in via</p>
+              <br></br>
               <GitHubLogin clientId="8244b51a8abe376aeb12"
               redirectUri='http://localhost:3000/Studentprofile'
+              buttonText="Signin"
               onSuccess={responseGithub}
               onFailure={responseGithub}/>
             </div>
